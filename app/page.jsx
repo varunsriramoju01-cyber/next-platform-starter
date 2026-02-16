@@ -1,63 +1,32 @@
-import Link from 'next/link';
-import { Card } from 'components/card';
-import { ContextAlert } from 'components/context-alert';
-import { Markdown } from 'components/markdown';
-import { RandomQuote } from 'components/random-quote';
-import { getNetlifyContext } from 'utils';
-
-const contextExplainer = `
-The card below is rendered on the server based on the value of \`process.env.CONTEXT\` 
-([docs](https://docs.netlify.com/configure-builds/environment-variables/#build-metadata)):
-`;
-
-const preDynamicContentExplainer = `
-The card content below is fetched by the client-side from \`/quotes/random\` (see file \`app/quotes/random/route.js\`) with a different quote shown on each page load:
-`;
-
-const ctx = getNetlifyContext();
-
-export default function Page() {
-    return (
-        <div className="flex flex-col gap-12 sm:gap-16">
-            <section>
-                <ContextAlert className="mb-6" />
-                <h1 className="mb-4">Netlify Platform Starter – Next.js</h1>
-                <p className="mb-6 text-lg">
-                    Deploy the latest version of Next.js — including Turbopack, React Compiler, and the new caching APIs
-                    — on Netlify in seconds. No configuration or custom adapter required.
-                </p>
-                <Link href="https://docs.netlify.com/frameworks/next-js/overview/" className="btn btn-lg sm:min-w-64">
-                    Read the Docs
-                </Link>
-            </section>
-            {!!ctx && (
-                <section className="flex flex-col gap-4">
-                    <Markdown content={contextExplainer} />
-                    <RuntimeContextCard />
-                </section>
-            )}
-            <section className="flex flex-col gap-4">
-                <Markdown content={preDynamicContentExplainer} />
-                <RandomQuote />
-            </section>
-        </div>
-    );
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"><span class="blue-text">AAPL stock chart</span></a><span class="trademark"> by TradingView</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "allow_symbol_change": true,
+  "calendar": false,
+  "details": false,
+  "hide_side_toolbar": true,
+  "hide_top_toolbar": false,
+  "hide_legend": false,
+  "hide_volume": false,
+  "hotlist": false,
+  "interval": "D",
+  "locale": "en",
+  "save_image": true,
+  "style": "1",
+  "symbol": "NASDAQ:AAPL",
+  "theme": "light",
+  "timezone": "Etc/UTC",
+  "backgroundColor": "#ffffff",
+  "gridColor": "rgba(46, 46, 46, 0.06)",
+  "watchlist": [],
+  "withdateranges": false,
+  "compareSymbols": [],
+  "studies": [],
+  "autosize": true
 }
-
-function RuntimeContextCard() {
-    const title = `Netlify Context: running in ${ctx} mode.`;
-    if (ctx === 'dev') {
-        return (
-            <Card title={title}>
-                <p>Next.js will rebuild any page you navigate to, including static pages.</p>
-            </Card>
-        );
-    } else {
-        const now = new Date().toISOString();
-        return (
-            <Card title={title}>
-                <p>This page was statically-generated at build time ({now}).</p>
-            </Card>
-        );
-    }
-}
+  </script>
+</div>
+<!-- TradingView Widget END -->
